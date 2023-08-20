@@ -1,0 +1,172 @@
+﻿@{
+    ViewData["Title"] = "Download de Vídeo ou Áudio";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"]</title>
+    <style>
+        * {
+            font-family: Helvetica;
+            padding: 0;
+            margin: 0;
+        }
+
+        form {
+            width: 60%;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #171717;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            background-image: url("http://www.transparenttextures.com/patterns/carbon-fibre-v2.png");
+        }
+
+        .ads {
+            padding: 30px;
+            margin: 1em auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+        input[type="url"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        input:focus {
+            box-shadow: 0 0 0 0;
+            outline: 0;
+        } 
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #ff0000;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #ff1f1f
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        #mediaList {
+            text-align: center;
+        }
+
+        #mediaList a {
+            color: red;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Download de Vídeo ou Áudio</h1>
+
+    <form asp-action="BaixarArquivo" method="post" onsubmit="return validateForm()">
+        <label for="tipoMedia">Tipo de Mídia:</label>
+        <select name="tipoMedia" id="mediaType">
+            <option value="audio">Áudio</option>
+            <option value="video">Vídeo</option>
+        </select>
+
+        <label for="mediaUrl">URL da Mídia:</label>
+        <input type="url" name="mediaUrl" id="mediaUrl" required />
+
+       
+
+        <button type="submit">Baixar</button>
+    </form>
+
+    <div class="ads">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8797446406547401"
+            crossorigin="anonymous"></script>
+
+        <ins class="adsbygoogle"
+            style="display:block;background-color:#ccc"
+            data-ad-client="ca-pub-8797446406547401"
+            data-ad-slot="5512877327"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <h1>Histórico de Downloads</h1>
+
+    <div id="mediaList"></div>
+
+    <script>
+        function validateForm() {
+            let mediaType = document.querySelector('select[name="tipoMedia"]').value;
+            let mediaUrl = document.querySelector('input[name="mediaUrl"]').value;
+
+            if (mediaType && mediaUrl && mediaUrl.includes('www.youtube.com/watch?v=')) return Save(mediaType, mediaUrl);
+        }
+
+        function Save(mediaType, mediaUrl) {
+            let storedMedia = localStorage.getItem('selectedMedia');
+
+            if (storedMedia === null) {
+                storedMedia = [];
+            } else {
+                storedMedia = JSON.parse(storedMedia);
+            }
+
+            let mediaItem = {
+                mediaType,
+                mediaUrl
+            }
+
+            storedMedia.push(mediaItem);
+
+            localStorage.setItem('selectedMedia', JSON.stringify(storedMedia));
+        }
+
+        function updateMediaList() {
+            let storedMedia = localStorage.getItem('selectedMedia');
+
+            if (storedMedia !== null) {
+                storedMedia = JSON.parse(storedMedia);
+
+                let mediaList = document.getElementById('mediaList');
+                mediaList.innerHTML = '';
+
+                for (let i = storedMedia.length - 1; i >= 0; i--) {
+                    let mediaItem = document.createElement('a');
+                    mediaItem.href = storedMedia[i].mediaUrl
+                    mediaItem.textContent = storedMedia[i].mediaType + ' - ' + storedMedia[i].mediaUrl;
+                    mediaList.appendChild(mediaItem);
+                    mediaList.appendChild(document.createElement('br'));
+                }
+            }
+        }
+
+        window.onload = updateMediaList;
+    </script>
+</body>
+</html>

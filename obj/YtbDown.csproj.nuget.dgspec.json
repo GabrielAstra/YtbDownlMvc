@@ -1,0 +1,70 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/gabriel/Desktop/YtbDown/YtbDown.csproj": {}
+  },
+  "projects": {
+    "/home/gabriel/Desktop/YtbDown/YtbDown.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/gabriel/Desktop/YtbDown/YtbDown.csproj",
+        "projectName": "YtbDown",
+        "projectPath": "/home/gabriel/Desktop/YtbDown/YtbDown.csproj",
+        "packagesPath": "/home/gabriel/.nuget/packages/",
+        "outputPath": "/home/gabriel/Desktop/YtbDown/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/gabriel/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "YoutubeExplode": {
+              "target": "Package",
+              "version": "[6.3.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/7.0.400/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
