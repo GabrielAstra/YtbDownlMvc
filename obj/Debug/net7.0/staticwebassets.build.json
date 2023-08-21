@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "3OJCreBxW5R5f7kl3yZ1EOjPFYyp/mS8G8I9pluYqRM=",
+  "Hash": "ghMwNdUHHHV/pr+8Z+Fnd98C4DgXItZe3mYSx7RGddE=",
   "Source": "YtbDown",
   "BasePath": "_content/YtbDown",
   "Mode": "Default",
@@ -83,6 +83,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/favicon.ico"
+    },
+    {
+      "Identity": "/home/gabriel/Desktop/YtbDown/wwwroot/js/limparCache.js",
+      "SourceId": "YtbDown",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/gabriel/Desktop/YtbDown/wwwroot/",
+      "BasePath": "_content/YtbDown",
+      "RelativePath": "js/limparCache.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/js/limparCache.js"
+    },
+    {
+      "Identity": "/home/gabriel/Desktop/YtbDown/wwwroot/js/mandarLista.js",
+      "SourceId": "YtbDown",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/gabriel/Desktop/YtbDown/wwwroot/",
+      "BasePath": "_content/YtbDown",
+      "RelativePath": "js/mandarLista.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/js/mandarLista.js"
     },
     {
       "Identity": "/home/gabriel/Desktop/YtbDown/wwwroot/js/site.js",

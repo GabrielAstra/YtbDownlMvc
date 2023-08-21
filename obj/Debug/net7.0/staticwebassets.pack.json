@@ -13,6 +13,14 @@
       "PackagePath": "staticwebassets/favicon.ico"
     },
     {
+      "Id": "/home/gabriel/Desktop/YtbDown/wwwroot/js/limparCache.js",
+      "PackagePath": "staticwebassets/js/limparCache.js"
+    },
+    {
+      "Id": "/home/gabriel/Desktop/YtbDown/wwwroot/js/mandarLista.js",
+      "PackagePath": "staticwebassets/js/mandarLista.js"
+    },
+    {
       "Id": "/home/gabriel/Desktop/YtbDown/wwwroot/js/site.js",
       "PackagePath": "staticwebassets/js/site.js"
     },

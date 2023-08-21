@@ -1,4 +1,4 @@
-﻿@{
+﻿﻿@{
     ViewData["Title"] = "Download de Vídeo ou Áudio";
 }
 
@@ -88,7 +88,7 @@
 
     <form asp-action="BaixarArquivo" method="post" onsubmit="return validateForm()">
         <label for="tipoMedia">Tipo de Mídia:</label>
-        <select name="tipoMedia" id="mediaType">
+        <select name="tipoMedia" id="tipoMedia">
             <option value="audio">Áudio</option>
             <option value="video">Vídeo</option>
         </select>
@@ -96,77 +96,84 @@
         <label for="mediaUrl">URL da Mídia:</label>
         <input type="url" name="mediaUrl" id="mediaUrl" required />
 
-       
-
         <button type="submit">Baixar</button>
     </form>
-
+    
     <div class="ads">
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8797446406547401"
-            crossorigin="anonymous"></script>
-
-        <ins class="adsbygoogle"
-            style="display:block;background-color:#ccc"
-            data-ad-client="ca-pub-8797446406547401"
-            data-ad-slot="5512877327"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
+        
     </div>
 
     <h1>Histórico de Downloads</h1>
 
-    <div id="mediaList"></div>
+    <table class="table table-striped table-dark">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Tipo de Mídia</th>
+                <th scope="col">URL</th>
+            </tr>
+        </thead>
+        <tbody id="mediaList">
+            
+        </tbody>
+    </table>
 
     <script>
+
         function validateForm() {
-            let mediaType = document.querySelector('select[name="tipoMedia"]').value;
+            let tipoMedia = document.querySelector('select[name="tipoMedia"]').value;
             let mediaUrl = document.querySelector('input[name="mediaUrl"]').value;
 
-            if (mediaType && mediaUrl && mediaUrl.includes('www.youtube.com/watch?v=')) return Save(mediaType, mediaUrl);
+            if (tipoMedia && mediaUrl && (mediaUrl.includes('www.youtube.com/watch?v=') || mediaUrl.includes('youtu.be/'))) {
+                Save(tipoMedia, mediaUrl);
+                return true;
+            } else {
+                alert('URL inválida');
+                return false;
+            }
         }
 
-        function Save(mediaType, mediaUrl) {
-            let storedMedia = localStorage.getItem('selectedMedia');
-
-            if (storedMedia === null) {
-                storedMedia = [];
-            } else {
-                storedMedia = JSON.parse(storedMedia);
-            }
+        function Save(tipoMedia, mediaUrl) {
+            let storedMedia = JSON.parse(localStorage.getItem('selectedMedia')) || [];
 
             let mediaItem = {
-                mediaType,
-                mediaUrl
-            }
+                tipoMedia,
+                mediaUrl,
+                timestamp: Date.now() 
+            };
 
             storedMedia.push(mediaItem);
 
             localStorage.setItem('selectedMedia', JSON.stringify(storedMedia));
+            updateMediaList();
         }
-
         function updateMediaList() {
-            let storedMedia = localStorage.getItem('selectedMedia');
+            let mediaList = document.getElementById('mediaList');
+            mediaList.innerHTML = ''; 
 
-            if (storedMedia !== null) {
-                storedMedia = JSON.parse(storedMedia);
+            let storedMedia = JSON.parse(localStorage.getItem('selectedMedia')) || [];
 
-                let mediaList = document.getElementById('mediaList');
-                mediaList.innerHTML = '';
-
-                for (let i = storedMedia.length - 1; i >= 0; i--) {
-                    let mediaItem = document.createElement('a');
-                    mediaItem.href = storedMedia[i].mediaUrl
-                    mediaItem.textContent = storedMedia[i].mediaType + ' - ' + storedMedia[i].mediaUrl;
-                    mediaList.appendChild(mediaItem);
-                    mediaList.appendChild(document.createElement('br'));
-                }
+            for (let i = 0; i < storedMedia.length; i++) {
+                let mediaItem = storedMedia[i];
+                let newRow = document.createElement('tr');
+                newRow.innerHTML = `<th scope="row">${i + 1}</th><td>${mediaItem.tipoMedia}</td><td>${mediaItem.mediaUrl}</td>`;
+                mediaList.appendChild(newRow);
             }
         }
 
-        window.onload = updateMediaList;
+        function clearExpiredCache() {
+            let storedMedia = JSON.parse(localStorage.getItem('selectedMedia')) || [];
+            const currentTime = Date.now();
+            const expirationTime = 30 * 60 * 1000; //tempo para armazenamento, deixar em 30 minutos!
+
+            storedMedia = storedMedia.filter(item => (currentTime - item.timestamp) < expirationTime);
+
+            localStorage.setItem('selectedMedia', JSON.stringify(storedMedia));
+        }
+
+        clearExpiredCache();
+
+        updateMediaList();
     </script>
 </body>
 </html>
